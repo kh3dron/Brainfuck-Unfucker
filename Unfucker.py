@@ -5,38 +5,40 @@ by KHEDRON
 logging = True
 #Upon becoming more familiar with the language, I see now that this
 #probably spells out a message of sorts
-BFFILE = """
+numberList = """
++>++>+++>>>+++++--->++
+"""
+
+#A single loop
+fourTimesFivePlusTwo = """
+++++[>+++++<-]>++
+"""
+
+#Another single loop program
+HelloWorld = """
 ++++++++++[>+++++++>++++++++++>+++>+<<<<-]
 >++.>+.+++++++..+++.>++.<<+++++++++++++++.
 >.+++.------.--------.>+.>.
 """
-simplerBFFILE = """
-+>++>+++>>>+++++--->++
-"""
-#1 2 3 0 0 0 2 3
 
-fourTimesFive = """
-++++[>+++++<-]++
+#multiple levels of loops, current challenge
+fib = """
++++++[->----[---->+<]>++.-[++++>---<]>.++.---------.+++.[++>---<]>--.++[->+++<]>.+++++++++..---.+++++++.+[-->+++++<]>-.<]
 """
-explain = """
-Set [1] to 4
-add 5 to [2], minus 1 from [1] (20)
-add 2 more to 20, make it 22
-return
-"""
+
 
 def locateEndLoop(text):
     n = len(text)-1
     while n > 0:
         if text[n] == "]":
             found = n
+            break
         n -= 1
     return text[:found]
 
+def recursableCompiling(file, cells, pointer):
+    print "Currently compiling\n", file
 
-def compileWithSimeplCharacters(file):
-    cells = [0]
-    pointer = 0
     legals = ["+", "-", "[", "]", ">", "<"]
 
     t = 0
@@ -60,23 +62,16 @@ def compileWithSimeplCharacters(file):
             cells[pointer] = int(raw_input())
 
         elif n == "[":
-            return cells[pointer]
-
+            isolatedLoop = locateEndLoop(file[t+1:])
+            while cells[pointer] > 1:
+                cells = recursableCompiling(isolatedLoop, cells, pointer)
 
         if n in legals:
             if logging:
                 print n, "tick", cells #console for debugging
-        else:
-
+            else:
+                fish = "glub glub"
         t+= 1
     return cells
 
-
-def handleLoops():
-    flagpoint = cells[pointer]
-    isolatedLoopRoutine = locateEndLoop(file[t+1:])
-    while flagpoint > 0:
-        cells += compileFucked(isolatedLoopRoutine)
-
-
-print compileWithSimeplCharacters(simplerBFFILE)
+print recursableCompiling(fib, [0], 0)
