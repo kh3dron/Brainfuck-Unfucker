@@ -12,9 +12,11 @@ BFFILE = """
 
 simplerBFFILE = """
 
-+>++>+++>>>+++++--->++++-
++>++>+++>>>+++++--->,++.
 """
 #1 2 3 0 0 0 2 3
+
+logging = True
 
 def convertFile(file):
 
@@ -34,8 +36,15 @@ def convertFile(file):
             pointer +=1
         elif n == "<":
             pointer -=1
+        elif n == ".":
+            print cells[pointer]
+        elif n == ",":
+            print "INPUT VALUE FOR CELL", pointer, ":",
+            cells[pointer] = int(raw_input())
+
         if n in legals:
-            print n, "tick", cells #console for debugging
+            if logging:
+                print n, "tick", cells #console for debugging
 
         else:
             fish = "glub glub" #my favorite do-nothing statement
