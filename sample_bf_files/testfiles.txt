@@ -1,0 +1,47 @@
+Problem:
+
+[  [  ]  ] is handled one way
+
+[  [  ]  ]  [  ] needs to be handled differently
+
+Hardest test file:
+
+
+Proper funciton:
+
+IF found a [:
+	if pointer is on a 0:
+		count distance to the matching ], minding depth
+		move pointer there
+		continue
+	elif pointer != 0:
+		evaluate
+
+IF found a ]:
+	if pointer is on != 0:
+		count back to matching [, minding depth
+		move cursor back that many spots
+		execute onwards
+	elif pointer == 0:
+		execute onwards
+	
++++[>+++<-]+++[>+++++[>+<-]]++ ends 3 2 14
+
+
+
++++++[+++]	on 9
++++[+]+[+]	on 9
++++[++[++]++]	on 13
+
+#"Jumpback done"
+#print jumpBack(8, "+++++[+++]")
+#print jumpBack(4, "+++[+]+[+]")
+#print "+++[++[++]++]+++"[:-3] #THIS CUTS OFF THE END BIT
+#print "+++[++[++]++]+++"[3:] #THIS CUTS OFF THE START BIT
+
+
+#print jumpBack("+++[++[++]++]")
+#print "\n\n"
+#"Jumpup done"
+#print jumpUp("[+]+[+]")
+#
